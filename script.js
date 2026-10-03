@@ -8,6 +8,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const siteLoader = document.getElementById('siteLoader');
   const loadingStartedAt = performance.now();
 
+  const getStoredTheme = () => {
+    try {
+      const savedTheme = localStorage.getItem('portfolio-theme');
+      if (savedTheme === 'dark' || savedTheme === 'light') {
+        return savedTheme;
+      }
+    } catch (error) {
+      // Ignore storage errors and fall back to the system preference.
+    }
+
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  };
+
+  const applyTheme = (theme) => {
+    root.setAttribute('data-theme', theme);
+
+    if (themeToggle) {
+      const nextTheme = theme === 'dark' ? 'light' : 'dark';
+      themeToggle.setAttribute('aria-label', `Switch to ${nextTheme} mode`);
+      themeToggle.setAttribute('aria-pressed', String(theme === 'dark'));
+    }
+  };
+
   if (siteLoader) {
     const pageContent = [...document.body.children].filter((element) => element !== siteLoader);
     pageContent.forEach((element) => {
@@ -51,22 +74,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (image.complete && image.naturalWidth === 0) showFallback();
   });
 
-  const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
-  root.setAttribute('data-theme', savedTheme);
+  const savedTheme = getStoredTheme();
+  applyTheme(savedTheme);
 
   if (themeToggle) {
-    const updateThemeToggle = (theme) => {
-      const nextTheme = theme === 'dark' ? 'light' : 'dark';
-      themeToggle.setAttribute('aria-label', `Switch to ${nextTheme} mode`);
-      themeToggle.setAttribute('aria-pressed', String(theme === 'dark'));
-    };
-
-    updateThemeToggle(savedTheme);
     themeToggle.addEventListener('click', () => {
       const nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       root.setAttribute('data-theme', nextTheme);
       localStorage.setItem('portfolio-theme', nextTheme);
-      updateThemeToggle(nextTheme);
+      applyTheme(nextTheme);
     });
   }
 
