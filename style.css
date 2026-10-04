@@ -989,13 +989,14 @@ img {
 
 .project-list {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 20px;
 }
 
 .project-case {
     display: grid;
-    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-    min-height: 320px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
     overflow: hidden;
     border: 1px solid var(--glass-card-border);
     border-radius: 18px;
@@ -1012,6 +1013,7 @@ img {
 
 .project-case-copy {
     display: flex;
+    grid-row: 2;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
@@ -1071,8 +1073,10 @@ img {
 .project-case-media {
     position: relative;
     display: block;
+    grid-row: 1;
     min-width: 0;
-    min-height: 320px;
+    min-height: 0;
+    aspect-ratio: 16 / 10;
     overflow: hidden;
     background: var(--bg-sections);
 }
@@ -1148,6 +1152,22 @@ img {
     outline-offset: 4px;
 }
 
+@media (min-width: 721px) and (max-width: 968px) {
+    .project-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 969px) {
+    .project-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .project-case-copy h3 {
+        font-size: clamp(1.4rem, 2vw, 1.8rem);
+    }
+}
+
 @media (max-width: 720px) {
     .projects-section {
         width: 100%;
@@ -1163,21 +1183,12 @@ img {
         margin-inline: 0;
     }
 
-    .project-case {
-        grid-template-columns: minmax(0, 1fr);
-    }
-
     .project-case-copy {
         padding: 24px;
     }
 
     .project-case-copy h3 {
         font-size: 1.8rem;
-    }
-
-    .project-case-media {
-        min-height: 0;
-        aspect-ratio: 16 / 10;
     }
 }
 
@@ -1897,12 +1908,16 @@ img {
 }
 
 .social-mini a:nth-child(2) svg,
-.social-mini a:nth-child(3) svg {
+.social-mini a:nth-child(4) svg {
     fill: none;
     stroke: currentColor;
     stroke-width: 1.7;
     stroke-linecap: round;
     stroke-linejoin: round;
+}
+
+.social-mini a:nth-child(3) svg {
+    fill: currentColor;
 }
 
 .social-mini .social-icon-dot {
