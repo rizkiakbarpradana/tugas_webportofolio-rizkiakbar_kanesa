@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const copyEmailButton = document.getElementById('copyEmail');
   const copyEmailFeedback = document.getElementById('copyEmailFeedback');
   const siteLoader = document.getElementById('siteLoader');
+  const photoViewer = document.getElementById('photoViewer');
+  const photoViewerImage = document.getElementById('photoViewerImage');
   const loadingStartedAt = performance.now();
 
   const getStoredTheme = () => {
@@ -73,6 +75,44 @@ document.addEventListener('DOMContentLoaded', () => {
     image.addEventListener('error', showFallback, { once: true });
     if (image.complete && image.naturalWidth === 0) showFallback();
   });
+
+  if (photoViewer instanceof HTMLDialogElement && photoViewerImage instanceof HTMLImageElement) {
+    const openPhotoViewer = (image) => {
+      if (!image.naturalWidth) return;
+      photoViewerImage.src = image.currentSrc || image.src;
+      photoViewer.showModal();
+    };
+
+    document.querySelectorAll('.profile-photo-trigger').forEach((image) => {
+      image.addEventListener('click', () => openPhotoViewer(image));
+      image.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openPhotoViewer(image);
+        }
+      });
+    });
+
+    photoViewer.querySelector('.photo-viewer-close')?.addEventListener('click', () => {
+      photoViewer.close();
+    });
+
+    photoViewer.addEventListener('cancel', (event) => {
+      event.preventDefault();
+      photoViewer.close();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && photoViewer.open) {
+        event.preventDefault();
+        photoViewer.close();
+      }
+    }, true);
+
+    photoViewer.addEventListener('click', (event) => {
+      if (event.target === photoViewer) photoViewer.close();
+    });
+  }
 
   const savedTheme = getStoredTheme();
   applyTheme(savedTheme);
