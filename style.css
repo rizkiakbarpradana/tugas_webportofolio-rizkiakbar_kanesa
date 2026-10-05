@@ -31,6 +31,7 @@
     --card-dark-fixed: #202020;
     --text-light-fixed: #f5f5f5;
     --text-muted-fixed: #b5b5b5;
+    --navbar-image-overlay: rgba(255, 255, 255, 0.45);
 }
 
 [data-theme="dark"] {
@@ -57,6 +58,7 @@
     --footer-muted: #c4c4c4;
     --footer-border: rgba(255, 255, 255, 0.12);
     --footer-dot: rgba(255, 255, 255, 0.26);
+    --navbar-image-overlay: rgba(20, 20, 20, 0.42);
 }
 
 /* ==========================================================================
@@ -198,6 +200,11 @@ img {
     transform: translateX(-50%);
     width: min(90%, 1100px);
     background: var(--glass-card-bg);
+    background-image:
+        linear-gradient(var(--navbar-image-overlay), var(--navbar-image-overlay)),
+        url("foto bromo.jpg");
+    background-position: center 38%;
+    background-size: cover;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--glass-card-border);
