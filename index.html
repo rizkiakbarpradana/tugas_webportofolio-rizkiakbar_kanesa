@@ -13,27 +13,23 @@
 <body>
     <div id="siteLoader" class="site-loader" role="status" aria-live="polite" aria-label="Loading Rizki's portfolio">
         <div class="loader-content">
-            <div class="loader-emblem" aria-hidden="true">
-                <span>RAP</span>
-                <i></i>
+            <div class="loader-stage">
+                <p class="loader-name" aria-hidden="true"><span>RIZKI AKBAR</span><span>PRADANA</span></p>
+                <img class="loader-portrait" src="foto_ijazah_smp-removebg-preview.png" alt="" aria-hidden="true">
             </div>
-            <p class="loader-name" aria-hidden="true">Rizki Akbar Pradana</p>
             <p class="loader-caption" aria-hidden="true">Software Engineer</p>
             <div class="loader-progress" aria-hidden="true"><span></span></div>
         </div>
     </div>
 
     <section id="top" class="hero-section">
-        <div class="hero-content reveal">
-            <div class="hero-avatar hero-showcase">
-                <img src="foto-saya.jpeg" alt="Foto Rizki Akbar Pradana" role="button" tabindex="0" aria-haspopup="dialog" aria-label="View larger photo of Rizki Akbar Pradana" class="profile-photo-trigger">
-                <span class="avatar-fallback" role="img" aria-label="Foto Rizki Akbar Pradana tidak tersedia">RA</span>
-                <div class="location-badge">
-                    <span>BASED IN</span>
-                    <strong>Malang, Indonesia</strong>
-                </div>
-                <button class="hero-arrow" type="button" aria-label="Open location">↗</button>
+        <div id="profileCard" class="profile-id-card" role="group" aria-label="Interactive ID card. Drag it to swing the lanyard.">
+            <canvas id="lanyardCanvas" aria-label="Rizki Akbar Pradana's profile photo ID card with Malang, Indonesia. Drag to move." tabindex="0"></canvas>
+            <div id="profileGreeting" class="profile-greeting" role="status" aria-live="polite">
+                <span id="profileGreetingText">Hello!</span>
             </div>
+        </div>
+        <div class="hero-content reveal">
             <span class="hero-tagline">Hi, I'm Rizki Akbar Pradana</span>
             <h1 class="hero-name"><span class="hero-title-line">FRONTEND</span><span class="hero-title-line">WEB DEVELOPER</span></h1>
             <p class="hero-bio">I'm a student majoring in Software Engineering who enjoys learning website development by building projects from scratch. I like creating clean, responsive, and useful interfaces while continuing to improve my skills every day.</p>
