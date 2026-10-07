@@ -22,21 +22,32 @@
         </div>
     </div>
 
-    <section id="top" class="hero-section">
-        <div id="profileCard" class="profile-id-card" role="group" aria-label="Interactive ID card. Drag it to swing the lanyard.">
-            <canvas id="lanyardCanvas" aria-label="Rizki Akbar Pradana's profile photo ID card with Malang, Indonesia. Drag to move." tabindex="0"></canvas>
-            <div id="profileGreeting" class="profile-greeting" role="status" aria-live="polite">
-                <span id="profileGreetingText">Hello!</span>
+            <section id="top" class="hero-section">
+        <!-- KONTAINER ID CARD (KANAN) -->
+        <div id="profileCard" class="profile-id-card" role="group" aria-label="Interactive 3D ID card. Drag it to swing the lanyard.">
+            <canvas id="lanyardCanvas"></canvas>
+            <div id="profileGreeting" class="profile-greeting">
+                <span id="profileGreetingText"></span>
             </div>
         </div>
+
+        <!-- KONTAINER KONTEN UTAMA (KIRI) -->
         <div class="hero-content reveal">
-            <span class="hero-tagline">Hi, I'm Rizki Akbar Pradana</span>
-            <h1 class="hero-name"><span class="hero-title-line">FRONTEND</span><span class="hero-title-line">WEB DEVELOPER</span></h1>
+            <span class="hero-tagline">HI, I'M RIZKI AKBAR PRADANA</span>
+            
+            <!-- Judul dua warna: putih + biru-abu (mengikuti variabel tema) -->
+            <h1 class="hero-name-video">
+                <span class="hero-title-line hero-title-top">FRONTEND</span>
+                <span class="hero-title-line hero-title-accent">WEB DEVELOPER</span>
+            </h1>
+            
             <p class="hero-bio">I'm a student majoring in Software Engineering who enjoys learning website development by building projects from scratch. I like creating clean, responsive, and useful interfaces while continuing to improve my skills every day.</p>
+            
             <div class="hero-actions">
                 <a href="#projects" class="btn-primary">Explore My Projects</a>
                 <a href="#contact" class="btn-secondary-outline">Get In Touch</a>
             </div>
+            
             <div class="hero-stats" aria-label="Portfolio highlights">
                 <div class="hero-stat"><strong>03</strong><span>Projects</span></div>
                 <div class="hero-stat"><strong>05</strong><span>Core Skills</span></div>
@@ -261,7 +272,8 @@
         <img id="photoViewerImage" alt="Enlarged photo of Rizki Akbar Pradana">
     </dialog>
 
-    <script src="script.js" defer></script>
+    <script type="module" src="script.js"></script>
+    <script type="module" src="/lanyard.jsx"></script>
     <noscript><style>#siteLoader { display: none; }</style></noscript>
 </body>
 </html>

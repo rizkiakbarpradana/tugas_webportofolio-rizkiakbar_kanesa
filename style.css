@@ -317,29 +317,346 @@ img {
 }
 
 /* ==========================================================================
-   4. HERO SECTION
+   4. HERO SECTION - STRUKTUR PENATAAN BLOK KOLOM (ANTI BERTUMPUK)
    ========================================================================== */
+
+/* Pastikan section atas bertindak sebagai blok pembungkus penuh */
+.hero-section {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+    padding-top: 140px !important;
+    padding-bottom: 64px !important;
+    overflow: hidden !important;
+    background-color: var(--bg-body) !important;
+}
+
+/* Wadah utama yang membagi kolom kiri dan kanan secara sejajar */
+.hero-container-block {
+    display: block !important;
+    width: 100% !important;
+    max-width: 1180px !important;
+    margin: 0 auto !important;
+    padding-inline: 24px !important;
+}
+
+/* Blok Kiri: Mengunci ukuran ruang teks agar tidak melar */
+.hero-content {
+    display: block !important;
+    float: left !important; /* Membuat teks mengalir di sisi kiri */
+    width: 55% !important;  /* Memakai 55% lebar layar */
+    max-width: 600px !important;
+    text-align: left !important;
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+/* Blok Kanan: Wadah berukuran pas khusus untuk ID Card */
+.profile-id-card-block {
+    display: block !important;
+    float: right !important; /* Membuat ID card mengalir di sisi kanan */
+    width: 40% !important;  /* Memakai 40% lebar layar */
+    height: 550px !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+/* Mengunci ukuran Canvas agar pas di dalam blok kanan */
+#lanyardCanvas {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Menghapus efek float agar section di bawahnya tidak ikut berantakan */
+.hero-container-block::after {
+    content: "" !important;
+    display: table !important;
+    clear: both !important;
+}
+
+/* ==========================================================================
+   RESPONSIF BLOK UNTUK HP / TABLET (OTOMATIS BERURUTAN KE BAWAH)
+   ========================================================================== */
+@media (max-width: 860px) {
+    .hero-content {
+        float: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        text-align: center !important;
+        margin-bottom: 40px !important;
+    }
+    
+    .profile-id-card-block {
+        float: none !important;
+        width: 100% !important;
+        height: 460px !important;
+        margin: 0 auto !important;
+    }
+}
+
+
+/* ==========================================================================
+   MASKING VIDEO KHUSUS FONT BLACK OPS ONE
+   ========================================================================== */
+.hero-name-video {
+    font-family: 'Black Ops One', system-ui, sans-serif !important; /* Memakai font baru */
+    font-size: clamp(2.3rem, 4.4vw, 4.0rem); /* Menyesuaikan skala font tebal agar pas */
+    font-weight: 400; /* Font ini aslinya bernilai 400 untuk ketebalan penuhnya */
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    position: relative;
+    display: block;
+    margin: 14px 0 24px 0;
+    width: fit-content;
+    
+    /* Memotong latar belakang menjadi pola huruf font */
+    background: #000;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.hero-name-video video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Penataan Otomatis untuk Layar HP */
+@media (max-width: 860px) {
+    .hero-section {
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 140px;
+        text-align: center;
+    }
+    .hero-content {
+        max-width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .hero-name-video {
+        width: 100%;
+        text-align: center;
+    }
+    .profile-id-card {
+        position: relative;
+        width: 100%;
+        height: 460px;
+        margin-top: 24px;
+    }
+    #lanyardCanvas {
+        position: relative;
+    }
+}
+
+/* ==========================================================================
+   PENGUNCI TATA LETAK UTAMA HERO SECTION (ANTI MORAT-MARIT)
+   ========================================================================== */
+
+/* 1. Paksa section atas agar kembali melebar penuh */
+.hero-section {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    min-height: 90vh !important;
+    padding-top: 150px !important;
+    overflow: visible !important;
+}
+
+/* 2. Kembalikan kotak teks (.hero-content) agar melebar normal ke sisi kiri */
+.hero-content {
+    max-width: 600px !important; /* Mengunci lebar teks agar pas di kiri */
+    width: 100% !important;
+    margin-left: 0 !important;   /* Memaksa teks rata kiri */
+    margin-right: auto !important;
+    text-align: left !important;
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+/* 3. Paksa ID Card Canvas melayang rapi khusus di area kanan layar */
+.profile-id-card {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+}
+
+#lanyardCanvas {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: auto !important; /* Kartu tetap bisa ditarik mouse */
+}
+
+/* ==========================================================================
+   EFEK GRADIEN WARNA FAJAR BROMO BERGERAK (SHIMMER)
+   ========================================================================== */
+.hero-name-bromo-gradient .hero-title-line {
+    font-family: 'Black Ops One', system-ui, sans-serif !important;
+    text-transform: uppercase !important;
+    line-height: 1.1 !important;
+    display: block !important;
+    width: fit-content !important;
+    
+    background: linear-gradient(
+        to right, 
+        #ff7e5f 0%, 
+        #feb47b 25%, 
+        #cbd5e1 50%, 
+        #feb47b 75%, 
+        #ff7e5f 100%
+    ) !important;
+    background-size: 200% auto !important;
+    
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    
+    animation: bromoShimmer 4s linear infinite !important;
+}
+
+@keyframes bromoShimmer {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+/* ==========================================================================
+   RESPONSIF TAMPILAN HP (OTOMATIS RATAKAN TENGAH)
+   ========================================================================== */
+@media (max-width: 860px) {
+    .hero-section {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        padding-top: 120px !important;
+    }
+    
+    .hero-content {
+        max-width: 100% !important;
+        text-align: center !important;
+        margin: 0 auto !important;
+    }
+    
+    .hero-name-bromo-gradient .hero-title-line {
+        margin: 0 auto !important;
+    }
+    
+    .profile-id-card {
+        position: relative !important;
+        height: 480px !important;
+        margin-top: 30px !important;
+    }
+    
+    #lanyardCanvas {
+        position: relative !important;
+    }
+}
+
+
+/* ==========================================================================
+   PERBAIKAN TOTAL: AMANKAN POSISI ID CARD DAN AKTIFKAN GRADIEN FAJAR BROMO
+   ========================================================================== */
+
+/* Pastikan section atas mendukung penumpukan elemen absolut secara aman */
 .hero-section {
     position: relative;
-    padding-inline: clamp(20px, 5vw, 72px);
-    padding-top: 144px;
-    padding-bottom: 64px;
-    min-height: calc(100vh - 40px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 5;
+    display: block;
+    width: 100%;
     overflow: visible;
-    background-image:
-        radial-gradient(circle at 78% 35%, var(--primary-soft), transparent 34%),
-        linear-gradient(135deg, var(--bg-sections), var(--bg-body));
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    transition: background-image 0.4s ease;
-    box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.14);
 }
+
+/* Mengembalikan ID Card Canvas melayang tegak di posisi aslinya */
+.profile-id-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; 
+    pointer-events: none;
+}
+
+#lanyardCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto; /* Kartu tetap bisa ditarik/drag mouse */
+}
+
+/* ==========================================================================
+   EFEK GRADIEN WARNA FAJAR BROMO BERGERAK (SHIMMER)
+   ========================================================================== */
+.hero-name-bromo-gradient .hero-title-line {
+    font-family: 'Black Ops One', system-ui, sans-serif !important;
+    text-transform: uppercase;
+    line-height: 1.1;
+    display: block;
+    width: fit-content;
+    
+    /* Kombinasi warna fajar gunung bromo: Emas, Jingga Matahari, Abu Vukanik */
+    background: linear-gradient(
+        to right, 
+        #ff7e5f 0%, 
+        #feb47b 25%, 
+        #cbd5e1 50%, 
+        #feb47b 75%, 
+        #ff7e5f 100%
+    );
+    background-size: 200% auto;
+    
+    /* Memotong warna gradien ke dalam huruf teks */
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    
+    /* Menjalankan animasi kilau warna secara halus */
+    animation: bromoShimmer 5s linear infinite;
+}
+
+/* Animasi menggeser kilatan gradien */
+@keyframes bromoShimmer {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+/* ==========================================================================
+   RESPONSIF UNTUK TAMPILAN HP
+   ========================================================================== */
+@media (max-width: 860px) {
+    .profile-id-card {
+        position: relative;
+        height: 460px;
+        margin-top: 24px;
+        order: 2;
+    }
+    
+    #lanyardCanvas {
+        position: relative;
+    }
+}
+
 
 .hero-content {
     display: flex;
@@ -393,34 +710,23 @@ img {
     animation-play-state: paused;
 }
 
-.profile-id-card {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    overflow: visible;
-    pointer-events: none;
-    user-select: none;
-    -webkit-user-select: none;
-}
-
 .profile-greeting {
     position: absolute;
     z-index: 1;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
+    display: inline-block;
     max-width: calc(100% - 24px);
-    padding: 12px 18px;
+    padding: 10px 16px;
     border: 1px solid rgba(255, 255, 255, 0.82);
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.94);
     box-shadow: 0 8px 24px rgba(22, 33, 48, 0.16);
     color: #29384b;
-    font-size: clamp(14px, 1.7vw, 16px);
-    font-weight: 700;
+    font-size: clamp(0.72rem, 1.2vw, 0.92rem);
+    font-weight: 500;
+    letter-spacing: 0.28em;
     line-height: 1;
+    text-align: center;
+    text-transform: uppercase;
     white-space: nowrap;
     pointer-events: none;
     transform: translate(-50%, -100%);
@@ -429,13 +735,7 @@ img {
 }
 
 .profile-greeting::before {
-    width: 9px;
-    height: 9px;
-    flex: 0 0 9px;
-    border-radius: 50%;
-    background: #e6a43b;
-    box-shadow: 0 0 0 3px rgba(230, 164, 59, 0.16);
-    content: "";
+    content: none;
 }
 
 [data-theme="dark"] .profile-greeting {
@@ -450,8 +750,9 @@ img {
     display: block;
     width: 100%;
     height: 100%;
-    pointer-events: none;
+    pointer-events: auto;
     outline: none;
+    touch-action: none;
 }
 
 .visually-hidden {
@@ -483,7 +784,7 @@ img {
     order: -1;
     width: 100%;
     margin-bottom: 24px;
-    font-size: clamp(2.2rem, 8.5vw, 5.5rem);
+    font-size: clamp(2rem, 5vw, 3.25rem);
     line-height: 1.08;
     letter-spacing: 0.01em;
     font-weight: 900;
@@ -2054,8 +2355,9 @@ img {
     }
 
     .hero-name {
-        font-size: clamp(2.4rem, 8.5vw, 4.8rem);
+        font-size: clamp(2.4rem, 6.5vw, 3.25rem);
     }
+
 }
 
 /* Side-by-side hero on wide screens; the default layout stacks on smaller screens. */
@@ -2088,7 +2390,7 @@ img {
         grid-area: title;
         width: 100%;
         margin-bottom: 22px;
-        font-size: clamp(2.7rem, 4.4vw, 4.5rem);
+        font-size: clamp(2.7rem, 4.4vw, 3.25rem);
         text-align: left;
     }
 
@@ -2183,7 +2485,7 @@ img {
     }
 
     .hero-section {
-        padding-top: clamp(560px, 76svh, 660px);
+        padding-top: clamp(620px, 76svh, 700px);
     }
 
     .hero-bio {
@@ -2275,7 +2577,7 @@ img {
     }
 
     .hero-name {
-        font-size: clamp(1.9rem, 9.5vw, 3.5rem);
+        font-size: clamp(1.75rem, 8.2vw, 2rem);
     }
 
     .skills-grid {
@@ -2733,4 +3035,293 @@ html.is-loading {
         height: min(68vh, 560px);
         border-radius: 14px;
     }
+}
+
+@media (min-width: 861px) {
+  .hero-content { pointer-events: none; }
+  .hero-content a, .hero-content button { pointer-events: auto; }
+}
+
+/* ==========================================================================
+   EFEK VIDEO DI DALAM TEKS (TEXT VIDEO CLIPPING)
+   ========================================================================== */
+.hero-name-video {
+    font-size: clamp(2.5rem, 6vw, 4.5rem); 
+    font-weight: 900;
+    text-transform: uppercase;
+    position: relative;
+    line-height: 1.1;
+    display: inline-block;
+    
+    
+    background-color: #fff;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent; 
+}
+
+.hero-name-video video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Memastikan video memenuhi area teks tanpa distorsi */
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   TATA LETAK HERO SECTION (KIRI TEKS - KANAN ID CARD)
+   ========================================================================== */
+
+/* Susunan grid untuk membagi teks di kiri dan ID card di kanan */
+.hero-section {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr; /* Membagi kolom secara seimbang */
+    gap: 40px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 24px;
+    min-height: 85vh;
+    overflow: hidden;
+}
+
+/* Sisi Kiri: Mengatur teks bio agar rapi */
+.hero-text-container {
+    position: relative;
+    z-index: 5;
+}
+
+/* Sisi Kanan: Mengatur wadah Canvas ID card */
+.profile-id-card {
+    position: relative;
+    width: 100%;
+    height: 600px; /* Memberikan ruang gerak vertikal yang cukup untuk kartu */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+#lanyardCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* ==========================================================================
+   EFEK GRADIEN BERGERAK TEMA FAJAR BROMO (100% AMAN UNTUK LAYOUT)
+   ========================================================================== */
+.hero-name-bromo-gradient .hero-title-line {
+    font-family: 'Black Ops One', system-ui, sans-serif;
+    text-transform: uppercase;
+    line-height: 1.1;
+    
+    /* Kombinasi warna fajar bromo: Jingga Matahari, Emas, dan Abu-abu Kabut */
+    background: linear-gradient(
+        to right, 
+        #ff7e5f 0%, 
+        #feb47b 25%, 
+        #e0e0e0 50%, 
+        #feb47b 75%, 
+        #ff7e5f 100%
+    );
+    background-size: 200% auto;
+    
+    /* Efek memotong warna ke dalam huruf teks */
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    
+    /* Jalankan animasi pergerakan warna */
+    animation: bromoShimmer 4s linear infinite;
+}
+
+/* Animasi mengalirkan warna gradien secara halus */
+@keyframes bromoShimmer {
+    0% {
+        background-position: 0% center;
+    }
+    100% {
+        background-position: 200% center;
+    }
+}
+
+
+/* ==========================================================================
+   RESPONSIF UNTUK TAMPILAN HP / LAYAR KECIL
+   ========================================================================== */
+@media (max-width: 900px) {
+    .hero-section {
+        grid-template-columns: 1fr; /* Berubah menjadi satu kolom vertikal di HP */
+        padding-top: 120px;
+        text-align: center;
+    }
+    
+    .hero-actions {
+        justify-content: center;
+    }
+    
+    .hero-stats {
+        justify-content: center;
+    }
+
+    .profile-id-card {
+        height: 500px;
+        margin-top: 20px;
+    }
+}
+
+
+
+/* ==========================================================================
+   FINAL HERO FIX - ID CARD, JUDUL, RESPONSIVE (BLOK INI HARUS PALING BAWAH)
+   Menimpa semua aturan .hero-section / .hero-content / .profile-id-card /
+   #lanyardCanvas / .hero-name-video yang saling bentrok di atas.
+   ========================================================================== */
+
+/* --- Hero: lebar penuh. Canvas ID card = seluruh area hero (dipakai script.js) --- */
+.hero-section {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 150px 24px 72px !important;
+    min-height: max(100svh, 760px) !important;  /* cukup tinggi agar kartu tidak terpotong */
+    overflow: hidden !important;
+    grid-template-columns: none !important;
+}
+
+.profile-id-card {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+    display: block !important;
+}
+
+#lanyardCanvas,
+.profile-id-card canvas {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    pointer-events: auto !important;
+    touch-action: pan-y !important;   /* geser vertikal tetap bisa scroll halaman di HP */
+}
+
+/* --- Kolom teks (kiri) --- */
+.hero-content {
+    position: relative !important;
+    z-index: 5 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    float: none !important;
+    width: 100% !important;
+    max-width: 600px !important;
+    margin: 0 0 0 max(0px, calc((100% - 1180px) / 2)) !important;
+    text-align: left !important;
+}
+
+.hero-content .hero-bio { margin: 0 0 28px !important; max-width: 560px !important; text-align: left !important; }
+.hero-content .hero-actions { justify-content: flex-start !important; }
+.hero-content .hero-stats { justify-content: flex-start !important; }
+
+/* --- Judul: putih + biru-abu seperti contoh (tanpa video Bromo) --- */
+.hero-name-video {
+    order: -1 !important;
+    display: block !important;
+    width: 100% !important;
+    margin: 12px 0 24px !important;
+    font-family: "Arial Black", "Segoe UI Black", "Helvetica Neue", Arial, system-ui, sans-serif !important;
+    font-size: clamp(2.2rem, 5.2vw, 4.2rem) !important;
+    font-weight: 900 !important;
+    line-height: 1.08 !important;
+    letter-spacing: 0.01em !important;
+    text-transform: uppercase !important;
+    background: none !important;
+    -webkit-background-clip: border-box !important;
+    background-clip: border-box !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+.hero-name-video .hero-title-line {
+    display: block !important;
+    width: auto !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+    background: none !important;
+    animation: none !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+.hero-name-video .hero-title-top    { color: var(--text-heading) !important; }        /* #f0f0f0 di tema gelap */
+.hero-name-video .hero-title-accent { color: var(--title-accent-strong) !important; } /* #8ca2bd di tema gelap */
+
+/* Hanya teks yang tembus klik ke kartu di desktop; link & tombol tetap bisa diklik */
+@media (min-width: 861px) {
+    .hero-content { pointer-events: none !important; }
+    .hero-content a,
+    .hero-content button { pointer-events: auto !important; }
+}
+
+/* --- Laptop kecil (861-1100px): teks sedikit lebih ramping agar tidak menabrak kartu --- */
+@media (min-width: 861px) and (max-width: 1100px) {
+    .hero-content { max-width: 52% !important; }
+    .hero-name-video { font-size: clamp(2rem, 4.6vw, 3rem) !important; }
+}
+
+/* --- Tablet & HP (<= 860px): kartu di atas, teks di bawah kartu --- */
+@media (max-width: 860px) {
+    .hero-section {
+        display: block !important;
+        /* ruang untuk kartu 3D = TOP_MOBILE(196) + tinggi kartu (lebar x 1.46) + 40; sama dengan lanyard.jsx */
+        padding: calc(196px + min(42vw, 220px) * 1.46 + 40px) 20px 56px !important;
+        min-height: 0 !important;
+    }
+
+    .hero-content {
+        align-items: center !important;
+        max-width: 560px !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+    }
+
+    .hero-content .hero-bio { margin: 0 auto 28px !important; text-align: center !important; }
+    .hero-content .hero-actions,
+    .hero-content .hero-stats { justify-content: center !important; }
+
+    .hero-name-video {
+        text-align: center !important;
+        font-size: clamp(1.7rem, 8.2vw, 3rem) !important;
+    }
+    .hero-name-video .hero-title-line { margin-inline: auto !important; }
+
+    .hero-content { pointer-events: auto !important; }
+}
+
+@media (max-width: 480px) {
+    .hero-section {
+        padding-top: calc(196px + min(50vw, 180px) * 1.46 + 40px) !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .hero-name-video { font-size: clamp(1.5rem, 8vw, 1.9rem) !important; }
 }
